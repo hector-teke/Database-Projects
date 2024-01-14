@@ -1,3 +1,44 @@
+<?php
+    session_start();
+    require_once "config.php";
+    $username = NULL;
+
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+
+        $query = "SELECT username FROM users WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $item = mysqli_fetch_assoc($result);
+            $username = $item['username'];
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+    } else {
+        header("Location: login.php");
+        exit();
+    }
+
+    function getYouTubeThumbnail($youtubeLink) {
+        $videoId = getYouTubeVideoId($youtubeLink);
+        $thumbnailUrl = "https://img.youtube.com/vi/{$videoId}/0.jpg";
+        return $thumbnailUrl;
+    }
+    
+    function getYouTubeVideoId($youtubeLink) {
+        $videoId = '';
+        parse_str(parse_url($youtubeLink, PHP_URL_QUERY), $params);
+        if (isset($params['v'])) {
+            $videoId = $params['v'];
+        }
+        return $videoId;
+    }
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +55,7 @@
     <!-- Upper bar -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Username</a>
+            <a class="navbar-brand" href="#"><?php echo $username; ?></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -47,8 +88,62 @@
             <div class="col-md-9">
                 <!-- Feed  -->
                 <div class="mt-4 overflow-auto" style="max-height: 100vp;">
-                    <!-- Contenido del feed musical -->
-                    <!-- Aquí puedes colocar las publicaciones, canciones, etc. -->
+                    
+                    <?php
+                        require_once "config.php";
+
+                        // Show the last 4 songs added
+                        $query = "SELECT * FROM songs ORDER BY id DESC LIMIT 10";
+                        $result = mysqli_query($conn, $query);
+
+                        // Verifica si la consulta fue exitosa
+                        if ($result) {
+                            while ($item = mysqli_fetch_assoc($result)) {
+                                // Accede a los datos de cada canción
+                                $name = $item['name'];
+                                $album = $item['album'];
+                                $artist = $item['artist'];
+                                $likes = $item['likes'];
+                                $link = $item['link'];
+
+                                ?>
+                                <div class="card mb-3">
+                                <div class="row g-0">
+
+                                    <div class="col-md-3">
+                                        <a href="<?php echo $link; ?>" target="_blank">
+                                        <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top" alt="Video Thumbnail">
+                                        </a>                                    
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo $name; ?></h5>
+                                            <p class="card-text"><?php echo "$artist - $album"; ?></p>
+                                            <p class="card-text"><?php echo "Likes: $likes"; ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        
+                                    </div>
+
+                                </div>
+                                </div>
+                                <?php
+                            }
+
+                            // Libera el resultado de la consulta
+                            mysqli_free_result($result);
+                        } else {
+                            // Manejo de error si la consulta no fue exitosa
+                            echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                        }
+
+                        // Cierra la conexión a la base de datos
+                        mysqli_close($conn);
+                    ?>
+
                 </div>
             </div>
         </div>

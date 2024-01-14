@@ -10,8 +10,8 @@ $result = mysqli_query($conn, $query);
 
 //Put the results into an array
 $users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+while ($item = mysqli_fetch_assoc($result)) {
+    $users[] = $item;
 }
 
 // Encode to json before send

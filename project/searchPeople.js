@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardText);
             card.appendChild(cardBody);
+
+            card.onclick = function() {
+                // User profile
+                window.location.href = 'view.php?userId=' + result.id;
+            };
         
             resultsPeople.appendChild(card);
         });
