@@ -9,11 +9,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password2 = $_POST["password2"];
     $description = isset($_POST["description"]) ? $_POST["description"] : null; //description can be empty
 
-    // Verify passwords are aqual
+    // Prevent SQL inyections
+    $username = mysqli_real_escape_string($conn, $username);
+    $password = mysqli_real_escape_string($conn, $password);
+    $password2 = mysqli_real_escape_string($conn, $password2);
+    $description = mysqli_real_escape_string($conn, $description);
+
+    // Verify passwords are equal
     if ($password === $password2) {
-        echo "Registration successful";
+
+        // Check if there's already another user with the same username
+        $checkQuery = "SELECT * FROM users WHERE username='$username'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if ($checkResult) {
+            if (mysqli_num_rows($checkResult) > 0) {
+                $userIncorrect = true;
+            } else {
+                // Insert the new user
+                $insertQuery = "INSERT INTO users (username, password, info) VALUES ('$username', '$password', '$description')";
+                $insertResult = mysqli_query($conn, $insertQuery);
+
+                if ($insertResult) {
+                    $userIncorrect = false;
+                    $passwordIncorrect = false;
+                } else {
+                    echo "Error: " . mysqli_error($conn);
+                }
+            }
+
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Passwords do not match";
+        $passwordIncorrect = true;
     }
 }
 ?>
@@ -35,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username:</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" <?php if ($userIncorrect) echo 'placeholder="This user already exists"';?> name="username" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
@@ -43,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3">
                     <label for="password2" class="form-label">Confirm Password:</label>
-                    <input type="password" class="form-control" id="password2" name="password2" required>
+                    <input type="password" class="form-control" id="password2" <?php if ($passwordIncorrect) echo 'placeholder="Passwords do not match"';?> name="password2" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description: (Optional)</label>
