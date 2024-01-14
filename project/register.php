@@ -1,5 +1,7 @@
 <?php
 require_once "config.php";
+session_start(); 
+
 $passwordIncorrect = false;
 $userIncorrect = false;
 
@@ -31,8 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $insertResult = mysqli_query($conn, $insertQuery);
 
                 if ($insertResult) {
-                    $userIncorrect = false;
-                    $passwordIncorrect = false;
+                    $_SESSION['id'] = mysqli_insert_id($conn);
+                    header("Location: home.php");
+                    exit();
+
                 } else {
                     echo "Error: " . mysqli_error($conn);
                 }

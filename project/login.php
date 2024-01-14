@@ -1,5 +1,7 @@
 <?php
 require_once "config.php";
+session_start();
+
 $passwordIncorrect = false;
 $userIncorrect = false;
 
@@ -21,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Compare the password
             if ($password === $user['password']) {
-                $passwordIncorrect = false;
-                $userIncorrect = false;
+                $_SESSION['id'] = $user['id'];
+                header("Location: home.php");
+                exit();
 
             } else {
                 $passwordIncorrect = true;
