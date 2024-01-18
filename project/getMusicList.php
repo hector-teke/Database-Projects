@@ -5,18 +5,18 @@ require_once "config.php";
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $search = mysqli_real_escape_string($conn, $search);
 
-$query = "SELECT id, username, info FROM users WHERE id != 1 AND username LIKE '%$search%' ORDER BY id DESC LIMIT 15";
+$query = "SELECT id, name, album, artist, likes, link FROM songs WHERE name LIKE '%$search%' OR album LIKE '%$search%' OR artist LIKE '%$search%' ORDER BY likes DESC LIMIT 15";
 $result = mysqli_query($conn, $query);
 
 //Put the results into an array
-$users = [];
+$songs = [];
 while ($item = mysqli_fetch_assoc($result)) {
-    $users[] = $item;
+    $songs[] = $item;
 }
 
 // Encode to json before send
 header('Content-Type: application/json');
-echo json_encode($users);
+echo json_encode($songs);
 
 mysqli_close($conn);
 ?>

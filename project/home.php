@@ -49,11 +49,12 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="home.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
 
     <!-- Upper bar -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><?php echo $username; ?></a>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -62,7 +63,7 @@
                         <a class="nav-link" href="#">My Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Search Music</a>
+                        <a class="nav-link" href="#">My Profile</a>
                     </li>
                 </ul>
             </div>
@@ -70,7 +71,7 @@
     </nav>
 
     <!-- Main container -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 50px;">
         <div class="row">
 
             <!-- People -->
@@ -81,20 +82,67 @@
 
                     <!-- People search results -->
                     <div id="resultsPeople" class="overflow-auto" style="max-height: 100vp;">
-                    
+
                     </div>
                 </div>
             </div>
 
-            <!-- Music -->
-            <div class="col-md-9">
-                <!-- Feed  -->
+            <!-- Feed -->
+            <div class="col-md-6">
                 <div class="mt-4 overflow-auto" style="max-height: 100vp;">
-                    
                     <?php
                         require_once "config.php";
 
                         // Show the last 4 songs added
+                        $query = "SELECT * FROM songs ORDER BY RAND() LIMIT 1";
+                        $result = mysqli_query($conn, $query);
+
+                        if ($result) {
+                            if ($item = mysqli_fetch_assoc($result)) {
+                                
+                                $name = $item['name'];
+                                $album = $item['album'];
+                                $artist = $item['artist'];
+                                $likes = $item['likes'];
+                                $link = $item['link'];
+
+                                ?>
+                                <div class="card mb-3 top-likes-card">
+                                <div class="row g-0">
+
+                                    <div class="col-md-4">
+                                        <a href="<?php echo $link; ?>" target="_blank">
+                                        <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" alt="Video Thumbnail">
+                                        </a>                                    
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h2 class="card-title text-white"><?php echo $name; ?></h2>
+                                            <h4 class="card-text text-white"><?php echo "$artist - $album"; ?></h4>
+                                            <p class="card-text text-white"><i class="fas fa-thumbs-up"></i><?php echo " Likes: $likes"; ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        
+                                    </div>
+
+                                </div>
+                                </div>
+                                <?php
+                            }
+
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                    ?>
+
+                    <h2>Last Added:</h2>
+                    <?php
+                        require_once "config.php";
+
+                        // Show the last songs added
                         $query = "SELECT * FROM songs ORDER BY id DESC LIMIT 10";
                         $result = mysqli_query($conn, $query);
 
@@ -113,20 +161,20 @@
 
                                     <div class="col-md-3">
                                         <a href="<?php echo $link; ?>" target="_blank">
-                                        <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top" alt="Video Thumbnail">
+                                        <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" alt="Video Thumbnail">
                                         </a>                                    
                                     </div>
 
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title"><?php echo $name; ?></h5>
                                             <p class="card-text"><?php echo "$artist - $album"; ?></p>
-                                            <p class="card-text"><?php echo "Likes: $likes"; ?></p>
+                                            <p class="card-text"><i class="fas fa-thumbs-up"></i><?php echo " Likes: $likes"; ?></p>
                                         </div>
                                     </div>
 
-                                    <div>
-                                        
+                                    <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
+                                                <i class="far fa-heart fs-4"></i>
                                     </div>
 
                                 </div>
@@ -135,7 +183,7 @@
                             }
 
                         } else {
-                            echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                            echo "Error: " . mysqli_error($conn);
                         }
 
                         mysqli_close($conn);
@@ -143,10 +191,25 @@
 
                 </div>
             </div>
+
+            <!-- Music -->
+            <div class="col-md-3">
+                <div class="mt-4">
+                    <!-- Music seach input -->
+                    <input type="text" id="searchMusic" class="form-control mb-3" placeholder="Search Music (name, artist or album)">
+
+                    <!-- Music search results -->
+                    <div id="resultsMusic" class="overflow-auto" style="max-height: 100vp;">
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="searchPeople.js"></script>
+    <script src="searchMusic.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

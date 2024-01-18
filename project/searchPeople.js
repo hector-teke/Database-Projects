@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             card.onclick = function() {
                 // User profile
-                window.location.href = 'view.php?userId=' + result.id;
+                window.location.href = 'profile.php?userId=' + result.id;
             };
         
             resultsPeople.appendChild(card);
