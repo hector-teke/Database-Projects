@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     var searchInput = document.getElementById('searchPeople');
     var resultsContainer = document.getElementById('resultsPeople');
+    search(""); //First Search
 
     searchInput.addEventListener('input', function () {
-        var search = this.value.toLowerCase();
+        var input = this.value.toLowerCase();
+        search(input);
+    });
 
+    function search(input) {
         // AJAX request
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -15,15 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // Send request with the search input
-        xhr.open('GET', 'getUserList.php?search=' + encodeURIComponent(search), true);
+        xhr.open('GET', 'getUserList.php?search=' + encodeURIComponent(input), true);
         xhr.send();
-    });
+    }
 
     function displayResults(results) {
         resultsPeople.innerHTML = '';
 
         if (results.length === 0) {
-            resultsPeople.innerHTML = 'No se encontraron resultados.';
+            resultsPeople.innerHTML = 'No results were found.';
             return;
         }
 

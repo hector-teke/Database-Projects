@@ -80,7 +80,9 @@
                     <input type="text" id="searchPeople" class="form-control mb-3" placeholder="Search Users">
 
                     <!-- People search results -->
-                    <div id="resultsPeople" class="overflow-auto" style="max-height: 100vp;"></div>
+                    <div id="resultsPeople" class="overflow-auto" style="max-height: 100vp;">
+                    
+                    </div>
                 </div>
             </div>
 
@@ -96,10 +98,9 @@
                         $query = "SELECT * FROM songs ORDER BY id DESC LIMIT 10";
                         $result = mysqli_query($conn, $query);
 
-                        // Verifica si la consulta fue exitosa
                         if ($result) {
                             while ($item = mysqli_fetch_assoc($result)) {
-                                // Accede a los datos de cada canción
+                                
                                 $name = $item['name'];
                                 $album = $item['album'];
                                 $artist = $item['artist'];
@@ -133,14 +134,10 @@
                                 <?php
                             }
 
-                            // Libera el resultado de la consulta
-                            mysqli_free_result($result);
                         } else {
-                            // Manejo de error si la consulta no fue exitosa
                             echo "Error al ejecutar la consulta: " . mysqli_error($conn);
                         }
 
-                        // Cierra la conexión a la base de datos
                         mysqli_close($conn);
                     ?>
 
