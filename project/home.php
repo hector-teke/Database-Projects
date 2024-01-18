@@ -106,6 +106,9 @@
                                 $likes = $item['likes'];
                                 $link = $item['link'];
 
+                                $query = "SELECT * FROM favorites WHERE user_id = {$_SESSION['id']} AND song_id = {$item['id']}";
+                                $isFavorite = mysqli_num_rows(mysqli_query($conn, $query)) > 0;
+
                                 ?>
                                 <div class="card mb-3 top-likes-card">
                                 <div class="row g-0">
@@ -116,7 +119,7 @@
                                         </a>                                    
                                     </div>
 
-                                    <div class="col-md-8">
+                                    <div class="col-md-7">
                                         <div class="card-body">
                                             <h2 class="card-title text-white"><?php echo $name; ?></h2>
                                             <h4 class="card-text text-white"><?php echo "$artist - $album"; ?></h4>
@@ -124,8 +127,13 @@
                                         </div>
                                     </div>
 
-                                    <div>
-                                        
+                                    <!-- Creates the hearts with the id off the song -->
+                                    <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
+                                        <?php if ($isFavorite) : ?>
+                                            <i class="fas fa-heart fs-4 text-danger favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                        <?php else : ?>
+                                            <i class="far fa-heart fs-4 favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
@@ -155,11 +163,13 @@
                                 $likes = $item['likes'];
                                 $link = $item['link'];
 
+                                $query = "SELECT * FROM favorites WHERE user_id = {$_SESSION['id']} AND song_id = {$item['id']}";
+                                $isFavorite = mysqli_num_rows(mysqli_query($conn, $query)) > 0;
                                 ?>
                                 <div class="card mb-3">
                                 <div class="row g-0">
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 d-flex align-items-center">
                                         <a href="<?php echo $link; ?>" target="_blank">
                                         <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" alt="Video Thumbnail">
                                         </a>                                    
@@ -173,8 +183,13 @@
                                         </div>
                                     </div>
 
+                                    <!-- Creates the hearts with the id off the song -->
                                     <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
-                                                <i class="far fa-heart fs-4"></i>
+                                        <?php if ($isFavorite) : ?>
+                                            <i class="fas fa-heart fs-4 text-danger favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                        <?php else : ?>
+                                            <i class="far fa-heart fs-4 favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
@@ -208,6 +223,7 @@
         </div>
     </div>
 
+    <script src="likes.js"></script>
     <script src="searchPeople.js"></script>
     <script src="searchMusic.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
