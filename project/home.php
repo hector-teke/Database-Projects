@@ -69,7 +69,7 @@
                         <a class="nav-link" href="#">My Albums</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Log-out</a>
+                        <a class="nav-link" href="logout.php">Log-out</a>
                     </li>
                 </ul>
             </div>
@@ -136,7 +136,7 @@
                                     <!-- Creates the hearts with the id off the song -->
                                     <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
                                         <?php if ($isFavorite) : ?>
-                                            <i class="fas fa-heart fs-4 text-danger favorite-btn-up" data-id="<?php echo $item['id']; ?>"></i>
+                                            <i class="fas fa-heart fs-4 text-danger favorite-btn-up heartbeat" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php else : ?>
                                             <i class="far fa-heart fs-4 favorite-btn-up" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php endif; ?>
@@ -192,7 +192,7 @@
                                     <!-- Creates the hearts with the id off the song -->
                                     <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
                                         <?php if ($isFavorite) : ?>
-                                            <i class="fas fa-heart fs-4 text-danger favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                            <i class="fas fa-heart fs-4 text-danger favorite-btn heartbeat" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php else : ?>
                                             <i class="far fa-heart fs-4 favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php endif; ?>
