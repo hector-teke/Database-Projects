@@ -47,23 +47,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="home.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
 </head>
 <body>
 
     <!-- Upper bar -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><?php echo $username; ?></a>
+            <a class="navbar-brand navbar-item" href="#"><?php echo $username; ?></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">My Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Profile</a>
+                        <a class="nav-link" href="#">My Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Albums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log-out</a>
                     </li>
                 </ul>
             </div>
@@ -130,9 +136,9 @@
                                     <!-- Creates the hearts with the id off the song -->
                                     <div class="col-md-1 d-flex align-items-end justify-content-center mb-3">
                                         <?php if ($isFavorite) : ?>
-                                            <i class="fas fa-heart fs-4 text-danger favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                            <i class="fas fa-heart fs-4 text-danger favorite-btn-up" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php else : ?>
-                                            <i class="far fa-heart fs-4 favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                            <i class="far fa-heart fs-4 favorite-btn-up" data-id="<?php echo $item['id']; ?>"></i>
                                         <?php endif; ?>
                                     </div>
 

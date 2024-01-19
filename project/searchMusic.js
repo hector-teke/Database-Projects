@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardText1.textContent = result.artist + ' - ' + result.album;
                 cardBody.appendChild(cardText1);
             
-                card.onclick = function() {
+                cardTitle.onclick = function() {
                     // Music album
                     window.location.href = 'music.php?songId=' + result.id;
                 };

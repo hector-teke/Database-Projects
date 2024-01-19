@@ -1,9 +1,26 @@
 #navbar{
-    background-image: linear-gradient(to bottom right, rgba(30, 0, 255, 0.95), rgba(16, 185, 232, 0.95));
+    background-image: linear-gradient(to bottom right, rgba(30, 0, 255, 0.9), rgba(16, 185, 232, 0.6));
     border-radius: 10px;
     margin: 5px;
 }
 
-.top-likes-card {
-    background: linear-gradient(to top left, #6dddff, rgb(8, 155, 86));
+.card, .form-control {
+    background: rgba(255, 255, 255, 0.4);
 }
+
+.top-likes-card {
+    background: linear-gradient(to top left, #6dddff, rgba(8, 155, 86, 0.7));
+}
+
+body {
+    background-image: url('background2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.navbar-item {
+    margin-right: 30px;
+    margin-left: 5px
+}
+
