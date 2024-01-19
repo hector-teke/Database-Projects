@@ -4,7 +4,19 @@
     margin: 5px;
 }
 
+@keyframes comein {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
 .card, .form-control {
+    animation-name: comein;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
     background: rgba(255, 255, 255, 0.4);
 }
 
@@ -20,7 +32,7 @@ body {
 }
 
 .navbar-item {
-    margin-right: 30px;
+    margin-right: 40px;
     margin-left: 5px;
 }
 
@@ -41,3 +53,30 @@ body {
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-20px); }
+    50% { transform: translateX(20px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+    background: rgba(250, 132, 132, 0.4);
+}
+
+.favorites-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to top left, #6dddff, rgba(8, 155, 86, 0.7));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+  }

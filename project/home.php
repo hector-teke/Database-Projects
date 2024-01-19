@@ -56,17 +56,20 @@
     <!-- Upper bar -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand navbar-item" href="#"><?php echo $username; ?></a>
+            <a class="navbar-brand navbar-item" href="profile.php"><?php echo $username; ?></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Music</a>
+                        <a class="nav-link text-white">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Artists</a>
+                        <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Albums</a>
+                        <a class="nav-link" href="artist.php">My Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="album.php">My Albums</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log-out</a>
@@ -98,8 +101,7 @@
                 <div class="mt-4 overflow-auto" style="max-height: 100vp;">
                     <?php
                         require_once "config.php";
-
-                        // Show the last 4 songs added
+                        
                         $query = "SELECT * FROM songs ORDER BY RAND() LIMIT 1";
                         $result = mysqli_query($conn, $query);
 

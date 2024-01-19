@@ -20,16 +20,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 var isFavorite = JSON.parse(xhr.responseText).isFavorite;   // Response of manageFavorites.php
 
                 if (isFavorite){
-                    heart.classList.add('fas', 'text-danger', 'heartbeat');
-                    heart.classList.remove('far');
+                    if(heart != null){
+                        heart.classList.add('fas', 'text-danger', 'heartbeat');
+                        heart.classList.remove('far');
+                    }
 
                     if(heartUp != null){
                         heartUp.classList.add('fas', 'text-danger', 'heartbeat');
                         heartUp.classList.remove('far');
                     }
                 } else {
-                    heart.classList.add('far');
-                    heart.classList.remove('fas', 'text-danger', 'heartbeat');
+                    if(heart != null){
+                        heart.classList.add('far');
+                        heart.classList.remove('fas', 'text-danger', 'heartbeat');
+                    }
+
                     if(heartUp != null){
                         heartUp.classList.add('far');
                         heartUp.classList.remove('fas', 'text-danger', 'heartbeat');
