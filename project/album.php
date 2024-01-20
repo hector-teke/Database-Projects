@@ -37,7 +37,7 @@
         $query = "SELECT * FROM favorites WHERE user_id = {$_SESSION['id']} AND song_id = {$song_id}";
         $isFavorite = mysqli_num_rows(mysqli_query($conn, $query)) > 0;
     } else {
-        header("Location: login.php");
+        header("Location: home.php");
         exit();;
     }
 

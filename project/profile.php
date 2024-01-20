@@ -185,7 +185,7 @@
                 $userId = $_SESSION['id'];
 
                 // List of songs id
-                $query = "SELECT song_id FROM favorites WHERE user_id = $userId";
+                $query = "SELECT song_id FROM favorites WHERE user_id = $userId ORDER BY id";
                 $result = mysqli_query($conn, $query);
             
                 if ($result) {
