@@ -51,16 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
             thumbnailCol.className = 'col-md-4 d-flex align-items-center';
             row.appendChild(thumbnailCol);
 
-                var thumbnailLink = document.createElement('a');    //link
-                thumbnailLink.href = result.link;
-                thumbnailLink.target = '_blank';
-                thumbnailCol.appendChild(thumbnailLink);
-
                 var thumbnailImg = document.createElement('img');   //thumbnail
                 thumbnailImg.src = getYoutubeThumbnail(result.link);
                 thumbnailImg.className = 'card-img-top rounded';
                 thumbnailImg.alt = 'Video Thumbnail';
-                thumbnailLink.appendChild(thumbnailImg);
+                thumbnailCol.appendChild(thumbnailImg);
 
             var contentCol = document.createElement('div');     //column2 for info
             contentCol.className = 'col-md-8';
@@ -80,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardText1.textContent = result.artist + ' - ' + result.album;
                 cardBody.appendChild(cardText1);
             
-                cardTitle.onclick = function() {
+                card.onclick = function() {
                     // Music album
-                    window.location.href = 'music.php?songId=' + result.id;
+                    window.location.href = 'album.php?songId=' + result.id;
                 };
             
         

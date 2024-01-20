@@ -66,10 +66,7 @@
                         <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="artist.php">My Artists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="album.php">My Albums</a>
+                        <a class="nav-link" href="profile.php">My Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log-out</a>
@@ -101,7 +98,7 @@
                 <div class="mt-4 overflow-auto" style="max-height: 100vp;">
                     <?php
                         require_once "config.php";
-                        
+
                         $query = "SELECT * FROM songs ORDER BY RAND() LIMIT 1";
                         $result = mysqli_query($conn, $query);
 
@@ -122,14 +119,14 @@
                                 <div class="row g-0">
 
                                     <div class="col-md-4">
-                                        <a href="<?php echo $link; ?>" target="_blank">
+                                        <a href="album.php?songId=<?php echo $item['id'] ?>">
                                         <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" alt="Video Thumbnail">
                                         </a>                                    
                                     </div>
 
                                     <div class="col-md-7">
                                         <div class="card-body">
-                                            <h2 class="card-title text-white"><?php echo $name; ?></h2>
+                                            <a style="text-decoration: none; color: black;" href="album.php?songId=<?php echo $item['id'] ?>"><h2 class="card-title text-white"><?php echo $name; ?></h2></a>
                                             <h4 class="card-text text-white"><?php echo "$artist - $album"; ?></h4>
                                             <p class="card-text text-white"><i class="fas fa-thumbs-up"></i><?php echo " Likes: $likes"; ?></p>
                                         </div>
@@ -178,14 +175,14 @@
                                 <div class="row g-0">
 
                                     <div class="col-md-3 d-flex align-items-center">
-                                        <a href="<?php echo $link; ?>" target="_blank">
+                                        <a href="album.php?songId=<?php echo $item['id'] ?>">
                                         <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" alt="Video Thumbnail">
                                         </a>                                    
                                     </div>
 
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?php echo $name; ?></h5>
+                                            <a style="text-decoration: none; color: black;" href="album.php?songId=<?php echo $item['id'] ?>"><h5 class="card-title"><?php echo $name; ?></h5></a>
                                             <p class="card-text"><?php echo "$artist - $album"; ?></p>
                                             <p class="card-text"><i class="fas fa-thumbs-up"></i><?php echo " Likes: $likes"; ?></p>
                                         </div>

@@ -105,7 +105,7 @@
     <!-- Upper bar -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand navbar-item" href="profile.php"><?php echo $username; ?></a>
+            <a class="navbar-brand navbar-item"><?php echo $username; ?></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -115,10 +115,7 @@
                         <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="artist.php">My Artists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="album.php">My Albums</a>
+                        <a class="nav-link text-white">My Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log-out</a>
