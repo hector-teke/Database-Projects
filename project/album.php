@@ -115,6 +115,9 @@
                         <a class="nav-link" href="home.php">Feed</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="allmusic.php">All Music</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
@@ -189,6 +192,66 @@
                             </div>
                         </div>
                     </div>
+                    <?php } 
+                    
+                    // List of songs in the same album
+                    $query = "SELECT name, id FROM songs WHERE album = '$album' AND artist = '$artist' AND name != '$name' ORDER BY name";
+                    $result = mysqli_query($conn, $query);
+                    
+                    if (mysqli_num_rows($result) > 0) {
+                    ?>
+
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="card-body">
+                                    <h4 class="card-title">More From <?php echo $album ?>:</h4>
+                                    <?php 
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                            <a style="text-decoration: none;" href="album.php?songId=<?php echo $row['id'] ?>">
+                                            <div class="card mb-1">
+                                                <div class="row g-0">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?php echo $row['name'] ?></h5>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            </a>       
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php }
+
+                    // List of songs of the same artist
+                    $query = "SELECT name, id FROM songs WHERE artist = '$artist' AND name != '$name' ORDER BY name";
+                    $result = mysqli_query($conn, $query);
+                    
+                    if (mysqli_num_rows($result) > 0) {
+                    ?>
+
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="card-body">
+                                    <h4 class="card-title">All From <?php echo $artist ?>:</h4>
+                                    <?php 
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                            <a style="text-decoration: none;" href="album.php?songId=<?php echo $row['id'] ?>">
+                                            <div class="card mb-1">
+                                                <div class="row g-0">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?php echo $row['name'] ?></h5>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            </a>       
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
                     <?php } ?>
 
                 </div>

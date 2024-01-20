@@ -112,6 +112,9 @@
                         <a class="nav-link" href="home.php">Feed</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="allmusic.php">All Music</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">

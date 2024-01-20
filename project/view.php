@@ -74,6 +74,9 @@
                         <a class="nav-link" href="home.php">Feed</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="allmusic.php">All Music</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
@@ -226,7 +229,7 @@
                             <div class="row g-0">
 
                                 <div class="col-md-1 d-flex align-items-center">
-                                    <a href="<?php echo $link; ?>" target="_blank">
+                                    <a href="album.php?songId=<?php echo $item['id'] ?>">
                                     <img src="<?php echo getYouTubeThumbnail($link); ?>" class="card-img-top rounded" height=70px alt="Video Thumbnail">
                                     </a>                                    
                                 </div>

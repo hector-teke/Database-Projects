@@ -83,10 +83,10 @@
                         <a class="nav-link" href="home.php">Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="allmusic.php">All Music</a>
+                        <a class="nav-link text-white">All Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white">My Music</a>
+                        <a class="nav-link" href="music.php">My Music</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">My Profile</a>
@@ -164,7 +164,6 @@
                                 $query = "SELECT * FROM favorites WHERE user_id = {$_SESSION['id']} AND song_id = {$item['id']}";
                                 $isFavorite = mysqli_num_rows(mysqli_query($conn, $query)) > 0;
 
-                                if ($isFavorite || $_SESSION['id']==1) {
                                 ?>
                                 <div class="card mb-3">
                                 <div class="row g-0">
@@ -203,7 +202,11 @@
                                     <!-- Creates the hearts with the id off the song -->
                                     <div class="col-md-2">
                                         <div class="card-body d-flex align-items-center justify-content-end">
-                                            <i class="fas fa-heart fs-4 text-danger favorite-btn heartbeat" data-id="<?php echo $item['id']; ?>"></i>
+                                            <?php if ($isFavorite) : ?>
+                                                <i class="fas fa-heart fs-4 text-danger favorite-btn heartbeat" data-id="<?php echo $item['id']; ?>"></i>
+                                            <?php else : ?>
+                                                <i class="far fa-heart fs-4 favorite-btn" data-id="<?php echo $item['id']; ?>"></i>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <?php } else { ?>
@@ -221,7 +224,7 @@
                                 </div>
                                 </div>
                                 <?php
-                                }
+                                
                             }
 
                         } else {
